@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import CosmicLoader from "./components/loader/CosmicLoader";
+import CosmicLoader from "./components/Loader/CosmicLoader";
 import Layout from "./components/layout/Layout";
 import AboutPage from "./pages/AboutPage";
 import AdminDashboard from "./pages/AdminDashboard";
