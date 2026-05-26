@@ -14,7 +14,7 @@ import {
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
-import "./cosmic-loader.css";
+import "./CosmicLoader.css";
 
 const TIMINGS = {
   flash: 3600,
