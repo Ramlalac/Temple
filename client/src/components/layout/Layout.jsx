@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Footer from "./Footer";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./Navbar";
 import ScrollToTopButton from "../common/ScrollToTopButton";
 
 function Layout() {
