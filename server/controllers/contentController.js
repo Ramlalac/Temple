@@ -1,11 +1,12 @@
 import getSupabaseClient from "../config/supabase.js";
 
-const ALLOWED_TABLES = new Set(["events", "gallery", "activities", "blogs"]);
+const ALLOWED_TABLES = new Set(["events", "gallery", "activities", "blogs", "donation_temples"]);
 const FALLBACK_COLUMNS = {
   events: ["id", "title", "description", "image_url", "section", "category", "created_at"],
   gallery: ["id", "title", "description", "image_url", "section", "category", "created_at"],
   activities: ["id", "title", "description", "image_url", "section", "category", "created_at"],
-  blogs: ["id", "title", "description", "image_url", "section", "category", "created_at"]
+  blogs: ["id", "title", "description", "image_url", "section", "category", "created_at"],
+  donation_temples: ["id", "title", "description", "image_url", "section", "category", "created_at"]
 };
 
 function getValidatedTable(table) {

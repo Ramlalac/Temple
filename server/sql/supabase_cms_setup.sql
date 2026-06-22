@@ -30,10 +30,21 @@ alter table if exists public.blogs
   add column if not exists category text,
   add column if not exists created_at timestamp with time zone default now();
 
+create table if not exists public.donation_temples (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text default '',
+  image_url text,
+  section text default 'donations page',
+  category text default '',
+  created_at timestamp with time zone default now()
+);
+
 alter table if exists public.events enable row level security;
 alter table if exists public.gallery enable row level security;
 alter table if exists public.activities enable row level security;
 alter table if exists public.blogs enable row level security;
+alter table if exists public.donation_temples enable row level security;
 
 drop policy if exists "events_select_all" on public.events;
 create policy "events_select_all" on public.events for select using (true);
@@ -70,3 +81,12 @@ drop policy if exists "blogs_update_all" on public.blogs;
 create policy "blogs_update_all" on public.blogs for update using (true) with check (true);
 drop policy if exists "blogs_delete_all" on public.blogs;
 create policy "blogs_delete_all" on public.blogs for delete using (true);
+
+drop policy if exists "donation_temples_select_all" on public.donation_temples;
+create policy "donation_temples_select_all" on public.donation_temples for select using (true);
+drop policy if exists "donation_temples_insert_all" on public.donation_temples;
+create policy "donation_temples_insert_all" on public.donation_temples for insert with check (true);
+drop policy if exists "donation_temples_update_all" on public.donation_temples;
+create policy "donation_temples_update_all" on public.donation_temples for update using (true) with check (true);
+drop policy if exists "donation_temples_delete_all" on public.donation_temples;
+create policy "donation_temples_delete_all" on public.donation_temples for delete using (true);

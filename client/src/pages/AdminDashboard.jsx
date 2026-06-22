@@ -9,7 +9,8 @@ const TABLE_OPTIONS = [
   { value: "events", label: "Events" },
   { value: "gallery", label: "Gallery" },
   { value: "activities", label: "Activities" },
-  { value: "blogs", label: "Blogs" }
+  { value: "blogs", label: "Blogs" },
+  { value: "donation_temples", label: "Donation Temple Cards" }
 ];
 
 const SECTION_OPTIONS = [
@@ -17,14 +18,21 @@ const SECTION_OPTIONS = [
   "events page",
   "gallery page",
   "blog page",
-  "activities page"
+  "activities page",
+  "donations page"
 ];
 
 const CATEGORY_OPTIONS = [
   { value: "", label: "No category" },
   { value: "festival", label: "Festival" },
   { value: "temple", label: "Temple" },
-  { value: "event", label: "Event" }
+  { value: "event", label: "Event" },
+  { value: "Lord Krishna", label: "Lord Krishna" },
+  { value: "Radha Rani", label: "Radha Rani" },
+  { value: "Lord Balaji", label: "Lord Balaji" },
+  { value: "Lord Shiva", label: "Lord Shiva" },
+  { value: "Lord Hanuman", label: "Lord Hanuman" },
+  { value: "Lord Ganesha", label: "Lord Ganesha" }
 ];
 
 const EMPTY_FORM = {
@@ -51,6 +59,7 @@ function AdminDashboard() {
   const [success, setSuccess] = useState("");
 
   const normalizedData = useMemo(() => normalizeContentList(data), [data]);
+  const isDonationTempleManager = selectedTable === "donation_temples";
 
   if (!token) {
     return <Navigate to="/login" replace />;
@@ -248,6 +257,9 @@ function AdminDashboard() {
               </h2>
               <p className="soft-copy text-sm sm:text-base">
                 Choose the table, assign the page section, upload media, and publish changes without refreshing the app.
+                {isDonationTempleManager
+                  ? " For donation temple cards, use Title as the card name and Category as the deity/donation recipient."
+                  : ""}
               </p>
             </div>
 
@@ -285,7 +297,9 @@ function AdminDashboard() {
             </div>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-white/87">Category</span>
+              <span className="mb-2 block text-sm font-medium text-white/87">
+                {isDonationTempleManager ? "Deity / Donation For" : "Category"}
+              </span>
               <select
                 className="input-surface bg-gray-800 text-white border border-gray-600 rounded p-2"
                 name="category"
@@ -307,7 +321,7 @@ function AdminDashboard() {
                 name="title"
                 value={form.title}
                 onChange={handleChange}
-                placeholder="Enter a title"
+                placeholder={isDonationTempleManager ? "Shree Krishna" : "Enter a title"}
               />
             </label>
 

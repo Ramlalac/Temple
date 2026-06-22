@@ -2,14 +2,16 @@ const SECTION_BY_TABLE = {
   events: "events page",
   gallery: "gallery page",
   blogs: "blog page",
-  activities: "activities page"
+  activities: "activities page",
+  donation_temples: "donations page"
 };
 
 const SECTION_ALIASES = {
   events: new Set(["events", "events page"]),
   gallery: new Set(["gallery", "gallery page"]),
   blogs: new Set(["blog", "blog page", "blogs", "blogs page"]),
-  activities: new Set(["activities", "activities page", "activity", "activity page"])
+  activities: new Set(["activities", "activities page", "activity", "activity page"]),
+  donation_temples: new Set(["donations", "donations page", "donation", "donation page"])
 };
 
 function slugify(value = "") {

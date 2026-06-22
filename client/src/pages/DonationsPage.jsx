@@ -3,7 +3,10 @@ import { Link, useSearchParams } from "react-router-dom";
 import PageHero from "../components/common/PageHero";
 import Seo from "../components/common/Seo";
 import { donationPayment, donationSubTemples, donationTypes } from "../data/siteContent";
-import { postApi } from "../lib/api";
+import { useFetch } from "../hooks/useFetch";
+import { useLanguage } from "../i18n/LanguageContext";
+import { fetchApi, postApi } from "../lib/api";
+import { filterContentBySection } from "../lib/content";
 
 function loadRazorpayCheckout() {
   return new Promise((resolve, reject) => {
@@ -37,12 +40,34 @@ const emptyForm = {
 };
 
 function DonationsPage() {
+  const { t } = useLanguage();
+  const { data: donationTempleRows } = useFetch(
+    () => fetchApi("/content/donation_temples"),
+    donationSubTemples,
+    []
+  );
+  const subTemples = useMemo(() => {
+    const filteredRows = filterContentBySection(donationTempleRows, "donation_temples");
+    const rows = filteredRows.length > 0 ? filteredRows : donationSubTemples;
+
+    return rows.map((item, index) => {
+      const fallback = donationSubTemples[index] || donationSubTemples[0];
+
+      return {
+        id: item.id || item.slug || fallback.id,
+        name: item.name || item.title || fallback.name,
+        deity: item.deity || item.category || fallback.deity,
+        description: item.description || fallback.description,
+        image: item.image_url || item.image || fallback.image
+      };
+    });
+  }, [donationTempleRows]);
   const [searchParams] = useSearchParams();
   const selectedTempleId = searchParams.get("deity");
   const formRef = useRef(null);
   const selectedTemple = useMemo(
-    () => donationSubTemples.find((temple) => temple.id === selectedTempleId) || null,
-    [selectedTempleId]
+    () => subTemples.find((temple) => String(temple.id) === selectedTempleId) || null,
+    [selectedTempleId, subTemples]
   );
   const [formData, setFormData] = useState(emptyForm);
   const [status, setStatus] = useState("idle");
@@ -143,26 +168,26 @@ function DonationsPage() {
   return (
     <>
       <Seo
-        title="Donations | Shree Krishna Devasthana"
+        title={t("donations.seoTitle")}
         description="Offer annadan, gau seva, and general donations to support the temple."
       />
       <PageHero
-        title="Offer Your Donation"
-        description="Select the deity or temple seva first. The donation form and Razorpay payment open only after your seva is chosen."
+        title={t("donations.heroTitle")}
+        description={t("donations.heroDescription")}
         image="https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=1600&q=80"
       />
 
       <section className="section-shell py-20">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">Choose Seva</p>
-          <h2 className="mt-4 font-heading text-4xl text-ink">Donate for a temple or deity</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">{t("donations.chooseSeva")}</p>
+          <h2 className="mt-4 font-heading text-4xl text-ink">{t("donations.chooseTitle")}</h2>
           <p className="soft-copy mt-4 text-lg leading-8">
-            Select one of the six temple sevas. The payment credentials remain the same, and your selected deity is captured in Razorpay notes.
+            {t("donations.chooseDescription")}
           </p>
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {donationSubTemples.map((temple) => {
+          {subTemples.map((temple) => {
             const isActive = selectedTemple?.id === temple.id;
 
             return (
@@ -183,7 +208,7 @@ function DonationsPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                   {isActive ? (
                     <span className="absolute right-4 top-4 rounded-full bg-gold px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-cosmic">
-                      Selected
+                      {t("donations.selected")}
                     </span>
                   ) : null}
                 </div>
@@ -200,10 +225,10 @@ function DonationsPage() {
         <div id="donation-form" ref={formRef} className="mt-12">
           {!selectedTemple ? (
             <div className="card-surface p-8 text-center">
-              <p className="text-sm uppercase tracking-[0.28em] text-gold">Donation form locked</p>
-              <h3 className="mt-3 font-heading text-3xl text-ink">Please choose a seva card first</h3>
+              <p className="text-sm uppercase tracking-[0.28em] text-gold">{t("donations.locked")}</p>
+              <h3 className="mt-3 font-heading text-3xl text-ink">{t("donations.chooseFirst")}</h3>
               <p className="soft-copy mx-auto mt-4 max-w-2xl">
-                After selecting the temple or deity, the donation form and Razorpay payment option will appear here.
+                {t("donations.lockedDescription")}
               </p>
             </div>
           ) : (
@@ -216,27 +241,27 @@ function DonationsPage() {
                   </div>
                 ))}
                 <div className="card-surface p-8">
-                  <p className="text-sm uppercase tracking-[0.28em] text-gold">Razorpay Payment</p>
-                  <h3 className="mt-3 font-heading text-2xl text-ink">Secure online donation</h3>
+                  <p className="text-sm uppercase tracking-[0.28em] text-gold">{t("donations.paymentTitle")}</p>
+                  <h3 className="mt-3 font-heading text-2xl text-ink">{t("donations.paymentSubtitle")}</h3>
                   <div className="mt-6 rounded-lg border border-amber-100 bg-amber-50 p-5">
                     <p className="font-semibold text-ink">Donation account</p>
                     <p className="mt-2 text-sm text-stone-700">Name: {donationPayment.name}</p>
                     <p className="mt-2 text-sm text-stone-700">Mobile: {donationPayment.phone}</p>
-                    <p className="mt-2 text-sm text-stone-700">Donation For: {selectedTemple.deity}</p>
+                    <p className="mt-2 text-sm text-stone-700">{t("donations.donationFor")}: {selectedTemple.deity}</p>
                     <p className="mt-2 break-all text-sm text-stone-700">UPI ID: {donationPayment.upiId}</p>
                   </div>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="card-surface p-8 sm:p-10">
-                <p className="text-sm uppercase tracking-[0.28em] text-gold">Donation Form</p>
-                <h2 className="mt-4 font-heading text-4xl text-ink">Contribute with devotion</h2>
+                <p className="text-sm uppercase tracking-[0.28em] text-gold">{t("donations.donationForm")}</p>
+                <h2 className="mt-4 font-heading text-4xl text-ink">{t("donations.contribute")}</h2>
                 <div className="mt-5 rounded-lg border border-gold/25 bg-amber-50 px-4 py-3 text-sm font-semibold text-ink">
-                  Donation For: {selectedTemple.deity}
+                  {t("donations.donationFor")}: {selectedTemple.deity}
                 </div>
                 <div className="mt-8 space-y-5">
                   <label className="block">
-                    <span className="mb-2 block text-sm font-medium text-stone-700">Name</span>
+                    <span className="mb-2 block text-sm font-medium text-stone-700">{t("donations.name")}</span>
                     <input
                       name="name"
                       value={formData.name}
@@ -246,7 +271,7 @@ function DonationsPage() {
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-2 block text-sm font-medium text-stone-700">Amount</span>
+                    <span className="mb-2 block text-sm font-medium text-stone-700">{t("donations.amount")}</span>
                     <input
                       name="amount"
                       type="number"
@@ -258,7 +283,7 @@ function DonationsPage() {
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-2 block text-sm font-medium text-stone-700">Donation For</span>
+                    <span className="mb-2 block text-sm font-medium text-stone-700">{t("donations.donationFor")}</span>
                     <input
                       name="donationFor"
                       value={formData.donationFor}
@@ -267,7 +292,7 @@ function DonationsPage() {
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-2 block text-sm font-medium text-stone-700">Purpose</span>
+                    <span className="mb-2 block text-sm font-medium text-stone-700">{t("donations.purpose")}</span>
                     <select
                       name="purpose"
                       value={formData.purpose}
@@ -288,10 +313,10 @@ function DonationsPage() {
                   className="mt-8 rounded-full bg-gradient-to-r from-saffron to-gold px-6 py-3 text-sm font-semibold text-white transition hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "creating"
-                    ? "Creating Razorpay order..."
+                    ? t("donations.creating")
                     : status === "verifying"
-                      ? "Verifying payment..."
-                      : "Pay with Razorpay"}
+                      ? t("donations.verifying")
+                      : t("donations.pay")}
                 </button>
                 {message ? (
                   <p

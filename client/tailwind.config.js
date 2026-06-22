@@ -4,30 +4,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Intentional inverted theme naming: light-themed semantic names map to dark palette
-        saffron: "#f4a338",
-        gold: "#f5d06f",
-        ivory: "#0b1020",
-        sandal: "#2b3d63",
-        ink: "#f5f0df",
-        cosmic: "#030712",
-        midnight: "#08111f",
-        ocean: "#0c203f",
-        starlight: "#c4d7ff"
+        saffron: "#e98f08",
+        gold: "#c88a13",
+        ivory: "#fffaf0",
+        sandal: "#f4c35b",
+        ink: "#321407",
+        cosmic: "#321407",
+        midnight: "#fff4dc",
+        ocean: "#fff8e7",
+        starlight: "#6d3a08",
+        maroon: "#7f1416",
+        communityGreen: "#1f7a58"
       },
       fontFamily: {
         heading: ["Cinzel", "Georgia", "Cambria", "Times New Roman", "serif"],
         body: ["\"Segoe UI\"", "Tahoma", "Geneva", "Verdana", "sans-serif"]
       },
       boxShadow: {
-        aura: "0 24px 80px rgba(7, 14, 30, 0.45)",
-        glow: "0 0 60px rgba(245, 208, 111, 0.16)"
+        aura: "0 18px 50px rgba(97, 51, 10, 0.12)",
+        glow: "0 14px 34px rgba(200, 138, 19, 0.2)"
       },
       backgroundImage: {
         "hero-glow":
-          "radial-gradient(circle at 20% 20%, rgba(244,163,56,0.26), transparent 26%), radial-gradient(circle at 78% 18%, rgba(72,123,255,0.22), transparent 24%), linear-gradient(135deg, rgba(3,7,18,0.96), rgba(7,17,31,0.94) 42%, rgba(12,32,63,0.92))",
+          "radial-gradient(circle at 20% 20%, rgba(248,212,107,0.3), transparent 26%), radial-gradient(circle at 78% 18%, rgba(31,122,88,0.14), transparent 24%), linear-gradient(135deg, rgba(255,250,240,0.98), rgba(255,244,220,0.96) 48%, rgba(255,255,255,0.98))",
         "lotus-pattern":
-          "radial-gradient(circle at top, rgba(31,61,115,0.38), transparent 32%), radial-gradient(circle at 15% 20%, rgba(244,163,56,0.14), transparent 20%), radial-gradient(circle at 85% 10%, rgba(103,145,255,0.18), transparent 24%), linear-gradient(135deg, #02050f 0%, #071220 48%, #0b1c33 100%)",
+          "radial-gradient(circle at top, rgba(248,212,107,0.22), transparent 32%), radial-gradient(circle at 15% 20%, rgba(245,158,11,0.12), transparent 20%), radial-gradient(circle at 85% 10%, rgba(31,122,88,0.1), transparent 24%), linear-gradient(135deg, #fffaf0 0%, #fff4dc 48%, #ffffff 100%)",
         "site-shimmer":
           "linear-gradient(120deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02) 45%, rgba(245,208,111,0.12))"
       },

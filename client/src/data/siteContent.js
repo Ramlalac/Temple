@@ -1,11 +1,11 @@
 export const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Temple", path: "/temple" },
-  { label: "Activities", path: "/activities" },
-  { label: "Gallery", path: "/gallery" },
-  { label: "Donations", path: "/donations" },
-  { label: "Contact", path: "/contact" }
+  { key: "home", label: "Home", path: "/" },
+  { key: "about", label: "About", path: "/about" },
+  { key: "temple", label: "Temple", path: "/temple" },
+  { key: "activities", label: "Activities", path: "/activities" },
+  { key: "gallery", label: "Gallery", path: "/gallery" },
+  { key: "donations", label: "Donations", path: "/donations" },
+  { key: "contact", label: "Contact", path: "/contact" }
 ];
 
 export const introStats = [
@@ -208,4 +208,11 @@ export const donationPayment = {
   upiId: "337074680722296@cnrb",
   qrImage:
     "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=upi%3A%2F%2Fpay%3Fpa%3D337074680722296%40cnrb%26pn%3DShree%2520Krishna%2520Devasthana%26cu%3DINR"
+};
+
+export const whatsappCommunity = {
+  groupName: "Shree Krishna Devasthan Sagar Chowk D Group Gadheghar",
+  inviteLink: "https://chat.whatsapp.com/",
+  qrImage:
+    "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fchat.whatsapp.com%2F"
 };

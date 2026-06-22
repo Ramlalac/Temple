@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -17,7 +17,7 @@ body {
 
 ::selection {
   background: rgba(244, 163, 56, 0.35);
-  color: #fff8ea;
+  color: #321407;
 }
 
 .section-shell {
@@ -25,7 +25,7 @@ body {
 }
 
 .card-surface {
-  @apply rounded-[2rem] border border-white/10 bg-white/5 shadow-aura backdrop-blur-xl;
+  @apply rounded-lg border border-amber-200/70 bg-white shadow-aura;
 }
 
 .gold-divider {
@@ -33,23 +33,23 @@ body {
 }
 
 .section-wash {
-  @apply border-y border-white/5 bg-white/5;
+  @apply border-y border-amber-100 bg-white/70;
 }
 
 .glass-header {
-  @apply border-b border-white/10 bg-[#020712]/55 backdrop-blur-2xl;
+  @apply border-b border-amber-100 bg-white/90 shadow-sm backdrop-blur-2xl;
 }
 
 .input-surface {
-  @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-ink outline-none transition placeholder:text-white/40 focus:border-saffron focus:bg-white/10;
+  @apply w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-stone-400 focus:border-saffron;
 }
 
 .soft-copy {
-  @apply text-white/70;
+  @apply text-stone-700;
 }
 
 .glass-pill {
-  @apply rounded-full border border-white/10 bg-white/5 text-ink backdrop-blur-xl;
+  @apply rounded-full border border-amber-200 bg-white text-ink shadow-sm;
 }
 
 .site-grid {
