@@ -141,6 +141,51 @@ export const donationTypes = [
   }
 ];
 
+export const donationSubTemples = [
+  {
+    id: "shree-krishna",
+    name: "Shree Krishna",
+    deity: "Lord Krishna",
+    description: "Support daily darshan, shringar, bhog, and Krishna bhakti programs.",
+    image: "https://images.unsplash.com/photo-1621355310264-03958a95f6d1?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    id: "radha-rani",
+    name: "Radha Rani",
+    deity: "Radha Rani",
+    description: "Offer seva for devotional music, flower decoration, and festival alankara.",
+    image: "https://images.unsplash.com/photo-1519817650390-64a93db511aa?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    id: "balaji",
+    name: "Balaji",
+    deity: "Lord Balaji",
+    description: "Contribute to temple maintenance, archana seva, and special puja support.",
+    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    id: "shiv-parivar",
+    name: "Shiv Parivar",
+    deity: "Lord Shiva",
+    description: "Support abhishek, deep seva, and sacred festival arrangements.",
+    image: "https://images.unsplash.com/photo-1625580916836-1badf2c15b32?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    id: "hanuman",
+    name: "Hanuman",
+    deity: "Lord Hanuman",
+    description: "Offer seva for Hanuman Chalisa path, oil lamps, and prasad distribution.",
+    image: "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    id: "ganesha",
+    name: "Ganesha",
+    deity: "Lord Ganesha",
+    description: "Donate for sankashti puja, festival decoration, and community offerings.",
+    image: "https://images.unsplash.com/photo-1567591414240-e9c1e59f3e06?auto=format&fit=crop&w=900&q=80"
+  }
+];
+
 export const contactInfo = {
   address:
     "D-Group, Sagar Chowk, Hydrabad Road, New Rangraj Nagar, Near new Yashodhara super specialist hospital, Solapur, 413005",

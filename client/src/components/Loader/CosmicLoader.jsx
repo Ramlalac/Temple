@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { motion } from "framer-motion";
 import {
   AdditiveBlending,
   BackSide,
@@ -233,11 +232,8 @@ export default function CosmicLoader({ onFinish }) {
   }, [onFinish]);
 
   return (
-    <motion.div
-      className="cosmic-loader"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: phase === "fade" ? 0 : 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className={`cosmic-loader ${phase === "fade" ? "is-fading" : ""}`}
       role="presentation"
       aria-hidden="true"
     >
@@ -247,31 +243,21 @@ export default function CosmicLoader({ onFinish }) {
 
       <div className={`cosmic-loader__flash ${phase === "flash" ? "is-active" : ""}`} />
 
-      <motion.div
-        className="cosmic-loader__vishnu-shell"
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{
-          opacity: phase === "vishnu" || phase === "fade" ? 1 : 0,
-          scale: phase === "vishnu" || phase === "fade" ? 1 : 1.04
-        }}
-        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+      <div
+        className={`cosmic-loader__vishnu-shell ${
+          phase === "vishnu" || phase === "fade" ? "is-visible" : ""
+        }`}
       >
         <div className="cosmic-loader__aura" />
-        <motion.img
+        <img
           src="/assets/vishnu.png"
           alt="Lord Vishnu reclining on Shesha Naag"
           className="cosmic-loader__vishnu-image"
           loading="eager"
-          initial={{ opacity: 0, y: 28 }}
-          animate={{
-            opacity: phase === "vishnu" || phase === "fade" ? 1 : 0,
-            y: phase === "vishnu" || phase === "fade" ? 0 : 28
-          }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         />
-      </motion.div>
+      </div>
 
       <div className="cosmic-loader__veil" />
-    </motion.div>
+    </div>
   );
 }

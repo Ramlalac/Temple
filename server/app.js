@@ -6,6 +6,7 @@ import eventsRouter from "./routes/events.js";
 import blogsRouter from "./routes/blogs.js";
 import contactRouter from "./routes/contact.js";
 import uploadRouter from "./routes/upload.js";
+import paymentsRouter from "./routes/payments.js";
 
 const app = express();
 
@@ -28,5 +29,6 @@ app.use("/api/upload", uploadRouter);
 app.use("/api/events", eventsRouter);
 app.use("/api/blogs", blogsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/payments", paymentsRouter);
 
 export default app;
